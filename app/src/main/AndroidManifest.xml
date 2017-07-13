@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="is.citizen.citizenapi">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".examples.FingerprintLoginExample"></activity>
+        <activity android:name=".examples.CreateNewUserExample"></activity>
+        <activity android:name=".examples.PasswordLoginExample"></activity>
+        <activity android:name=".examples.CreateFingerprintKeyExample"></activity>
+        <activity android:name=".examples.SetNameExample"></activity>
+        <activity android:name=".examples.SetOriginExample"></activity>
+        <activity android:name=".examples.SetPhoneExample"></activity>
+        <activity android:name=".examples.ConfirmPhoneExample"></activity>
+        <activity android:name=".examples.SetAddressExample"></activity>
+        <activity android:name=".examples.GetPersonExample"></activity>
+        <activity android:name=".examples.IssueTokenExample"></activity>
+        <activity android:name=".examples.GetRequestedTokensExample"></activity>
+        <activity android:name=".examples.GrantTokenExample"></activity>
+        <activity android:name=".examples.DeclineTokenExample"></activity>
+        <activity android:name=".examples.SignTokenExample"></activity>
+        <activity android:name=".examples.VerifySignedTokenExample"></activity>
+        <activity android:name=".examples.GrantWebLoginTokenExample"></activity>
+    </application>
+
+</manifest>
