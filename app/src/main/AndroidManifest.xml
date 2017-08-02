@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="is.citizen.citizenapi">
+    package="is.citizen.citizenexampleapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="is.citizen.citizenexampleapp.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,23 +22,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".examples.FingerprintLoginExample"></activity>
-        <activity android:name=".examples.CreateNewUserExample"></activity>
-        <activity android:name=".examples.PasswordLoginExample"></activity>
-        <activity android:name=".examples.CreateFingerprintKeyExample"></activity>
-        <activity android:name=".examples.SetNameExample"></activity>
-        <activity android:name=".examples.SetOriginExample"></activity>
-        <activity android:name=".examples.SetPhoneExample"></activity>
-        <activity android:name=".examples.ConfirmPhoneExample"></activity>
-        <activity android:name=".examples.SetAddressExample"></activity>
-        <activity android:name=".examples.GetPersonExample"></activity>
-        <activity android:name=".examples.IssueTokenExample"></activity>
-        <activity android:name=".examples.GetRequestedTokensExample"></activity>
-        <activity android:name=".examples.GrantTokenExample"></activity>
-        <activity android:name=".examples.DeclineTokenExample"></activity>
-        <activity android:name=".examples.SignTokenExample"></activity>
-        <activity android:name=".examples.VerifySignedTokenExample"></activity>
-        <activity android:name=".examples.GrantWebLoginTokenExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.FingerprintLoginExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.CreateNewUserExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.PasswordLoginExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.CreateFingerprintKeyExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.SetNameExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.SetOriginExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.SetPhoneExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.ConfirmPhoneExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.SetAddressExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.GetPersonExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.IssueTokenExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.GetRequestedTokensExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.GrantTokenExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.DeclineTokenExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.SignTokenExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.VerifySignedTokenExample"></activity>
+        <activity android:name="is.citizen.citizenexampleapp.examples.GrantWebLoginTokenExample"></activity>
     </application>
 
 </manifest>

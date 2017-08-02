@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Citizen API</string>
+    <string name="action_settings">Settings</string>
+    <string name="fingerprint_hint">Touch sensor</string>
+    <string name="fingerprint_success">Fingerprint recognized</string>
+    <string name="fingerprint_not_recognized">Fingerprint not recognized. Try again</string>
+    <string name="fingerprint_ok">Ok</string>
+    <string name="fingerprint_cancel">Cancel</string>
+    <string name="fingerprint_use_password">Use password</string>
+    <string name="fingerprint_password_description">Enter your password to continue</string>
+    <string name="fingerprint_new_fingerprint_enrolled_description">A new fingerprint was added to this device, so your password is required.</string>
+    <string name="fingerprint_password">Password</string>
+    <string name="fingerprint_use_fingerprint_in_future">Use fingerprint in the future</string>
+    <string name="fingerprint_fingerprint_description">Confirm fingerprint to continue</string>
+    <string name="fingerprint_sign_in">Sign in</string>
+    <string name="fingerprint_sign_token">Sign Token</string>
+</resources>

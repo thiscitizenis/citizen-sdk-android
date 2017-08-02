@@ -1,18 +1,18 @@
-apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
+
     defaultConfig {
-        multiDexEnabled true
-        applicationId "is.citizen.citizenexampleapp"
         minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -42,13 +42,18 @@ android {
 
 dependencies {
     // compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(":citizenapi")
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.2'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.5'
+    compile 'org.apache.commons:commons-lang3:3.0'
+    compile 'com.madgag.spongycastle:core:1.54.0.0'
+    compile 'com.madgag.spongycastle:prov:1.54.0.0'
+    compile 'com.madgag.spongycastle:pkix:1.54.0.0'
     testCompile 'junit:junit:4.12'
 }
