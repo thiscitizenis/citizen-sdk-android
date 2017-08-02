@@ -1,8 +1,15 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
+
+    lintOptions {
+        abortOnError false
+    }
 
     defaultConfig {
         minSdkVersion 21
@@ -12,8 +19,8 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -33,14 +40,10 @@ android {
         exclude 'META-INF/index.list'
         exclude 'META-INF/DEPENDENCIES'
     }
-
-    dexOptions {
-       javaMaxHeapSize "4g"
-       preDexLibraries = false
-    }
 }
 
 dependencies {
+
     // compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -55,5 +58,126 @@ dependencies {
     compile 'com.madgag.spongycastle:core:1.54.0.0'
     compile 'com.madgag.spongycastle:prov:1.54.0.0'
     compile 'com.madgag.spongycastle:pkix:1.54.0.0'
+
     testCompile 'junit:junit:4.12'
+}
+
+
+// The rest of this file is config for uploading to Bintray / JCenter.
+//
+// To publish a package, the Bintray user ID and API key must be specified.
+// These can be set in local.properties in the project root in the 
+// following properties:
+//
+//   bintrayUser
+//   bintrayApiKey
+//
+// Alternatively, they can be set in the following environment variables:
+//
+//   BINTRAY_USER
+//   BINTRAY_API_KEY
+//
+// The Bintray package version needs to be set, which is in the following
+// variable under this comment:
+//
+//   bintrayVersion
+//
+// The package can now be built and uploaded to Bintray using the 
+// following commands from the project root.
+//
+//   ./gradlew clean build generateRelease
+//
+//   ./gradlew citizenapi:bintrayUpload
+//
+
+def bintrayVersion = '1.001'
+def bintrayArtifactId = 'citizen-android-sdk'
+def bintrayGroupId = 'is.citizen'
+
+def localReleaseDest = "${buildDir}/release/${bintrayVersion}"
+
+task androidJavadocs(type: Javadoc) {
+    failOnError = false
+    source = android.sourceSets.main.java.srcDirs
+    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    classpath += files(ext.androidJar)
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+     classifier = 'sources'
+     from android.sourceSets.main.java.srcDirs
+}
+
+uploadArchives {
+     repositories.mavenDeployer {
+         pom.groupId = bintrayGroupId
+         pom.artifactId = bintrayArtifactId
+         pom.version = bintrayVersion
+         // Add other pom properties here if you want (developer details / licenses)
+         repository(url: "file://${localReleaseDest}")
+    }
+}
+
+task zipRelease(type: Zip) {
+     from localReleaseDest
+     destinationDir buildDir
+     archiveName "release-${bintrayVersion}.zip"
+}
+
+task generateRelease {
+     doLast {
+        println "Release ${bintrayVersion} can be found at ${localReleaseDest}/"
+        println "Release ${bintrayVersion} zipped can be found ${buildDir}/release-${bintrayVersion}.zip"
+    }
+}
+
+generateRelease.dependsOn(uploadArchives)
+generateRelease.dependsOn(zipRelease)
+
+
+artifacts {
+     archives androidSourcesJar
+     archives androidJavadocsJar
+}
+
+
+bintray {
+    def localPropertiesFile = rootProject.file('local.properties')
+
+    Properties localProperties = new Properties()
+
+    if (localPropertiesFile.exists()) {
+        localProperties.load(localPropertiesFile.newDataInputStream())
+    }
+
+    user = localProperties.getProperty('bintrayUser')
+    key  = localProperties.getProperty('bintrayApiKey')
+
+    if (!user || !key) {
+        user = System.getenv('BINTRAY_USER')
+        key = System.getenv('BINTRAY_API_KEY')
+    }
+
+    filesSpec {
+       from "${localReleaseDest}"
+       into '.'
+    }
+
+    pkg {
+        name = 'citizen-android-sdk'
+        repo = 'Citizen'
+        desc = 'Android SDK for the Citizen authentication and data exchange service'
+        websiteUrl = 'https://github.com/thiscitizenis/sdk-android'
+        vcsUrl = 'https://github.com/thiscitizenis/sdk-android.git'
+        licenses = ['GPL-3']
+        version {
+            name = "${bintrayVersion}"
+            vcsTag = "${bintrayVersion}"
+        }
+    }
 }
