@@ -2,6 +2,7 @@ package is.citizen.citizenexampleapp.examples;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,8 +14,10 @@ import android.widget.TextView;
 
 import is.citizen.citizenapi.async.login.EnrollAuthPublicKeyTask;
 import is.citizen.citizenapi.exception.CryptoException;
+import is.citizen.citizenapi.exception.FingerprintException;
 import is.citizen.citizenapi.resource.User;
 import is.citizen.citizenapi.service.CryptoService;
+import is.citizen.citizenapi.service.FingerprintService;
 import is.citizen.citizenapi.service.UserService;
 import is.citizen.citizenapi.util.Constant;
 
@@ -64,10 +67,12 @@ public class CreateFingerprintKeyExample extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example_default);
 
+        final Context context = this.getApplicationContext();
         final Activity activity = this;
 
         final UserService userService = new UserService();
         final CryptoService cryptoService = new CryptoService();
+        final FingerprintService fingerprintService = new FingerprintService(context, cryptoService);
         final EnrollAuthPublicKeyTask.AsyncResponse callback = this;
 
         exampleDescription = (TextView) findViewById(R.id.example_description);
@@ -100,11 +105,10 @@ public class CreateFingerprintKeyExample extends Activity
             @Override
             public void onClick(View view) {
                 try {
-                    cryptoService.createKeyPair(Constant.CITIZEN_FINGERPRINT_AUTH_KEY, true);
-                    String encodedAuthPublicKey = cryptoService.getEncodedPublicKey(Constant.CITIZEN_FINGERPRINT_AUTH_KEY);
+                    String encodedAuthPublicKey = fingerprintService.createFingerprintKeyPair();
                     EnrollAuthPublicKeyTask enrollAuthPublicKeyTask = new EnrollAuthPublicKeyTask(callback, userService);
                     enrollAuthPublicKeyTask.execute(userId, encodedAuthPublicKey, apiKey);
-                } catch (CryptoException e) {
+                } catch (FingerprintException e) {
                     Log.e(TAG, "Caught exception: " + e.getMessage());
                     resultValue.setText("Exception");
                 }

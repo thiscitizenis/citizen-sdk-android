@@ -1,11 +1,13 @@
 package is.citizen.citizenapi.service;
 
 
+import android.annotation.TargetApi;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 
 import java.io.IOException;
+import java.security.KeyPair;
 import java.security.KeyStore;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -62,7 +64,13 @@ public class FingerprintService {
     }
 
     public Signature getFingerprintSignature()
-            throws FingerprintException
+        throws FingerprintException
+    {
+        return getFingerprintSignature(Constant.CITIZEN_FINGERPRINT_AUTH_KEY);
+    }
+
+    public Signature getFingerprintSignature(String keyName)
+        throws FingerprintException
     {
         KeyStore mKeyStore;
 
@@ -72,7 +80,7 @@ public class FingerprintService {
         try {
             mKeyStore = cryptoService.getKeyStore();
             mKeyStore.load(null);
-            key = cryptoService.getPrivateKey(Constant.CITIZEN_FINGERPRINT_AUTH_KEY);
+            key = cryptoService.getPrivateKey(keyName);
         } catch (CryptoException | CertificateException |
                 NoSuchAlgorithmException | IOException e)
         {
@@ -88,5 +96,22 @@ public class FingerprintService {
         }
 
         return signature;
+    }
+
+    public String createFingerprintKeyPair()
+        throws FingerprintException
+    {
+        return createFingerprintKeyPair(Constant.CITIZEN_FINGERPRINT_AUTH_KEY);
+    }
+
+    public String createFingerprintKeyPair(String keyName)
+        throws FingerprintException
+    {
+        try {
+            cryptoService.createKeyPair(keyName, true);
+            return cryptoService.getEncodedPublicKey(keyName);
+        } catch (CryptoException e) {
+            throw new FingerprintException(e.getMessage());
+        }
     }
 }
