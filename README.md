@@ -1,4 +1,4 @@
-Android SDK for the Citizen secure login and data exchange service.
+# Android SDK for the Citizen secure login and data exchange service.
 
 More about the Citizen Service can be found here:
 
