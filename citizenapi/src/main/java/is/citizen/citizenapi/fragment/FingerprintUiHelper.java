@@ -47,8 +47,8 @@ public class FingerprintUiHelper extends FingerprintManagerCompat.Authentication
 			}
 		};
 
-	FingerprintUiHelper(FingerprintManagerCompat fingerprintManager,
-                        ImageView icon, TextView errorTextView, Callback callback)
+	public FingerprintUiHelper(FingerprintManagerCompat fingerprintManager,
+                               ImageView icon, TextView errorTextView, Callback callback)
 	{
 		mFingerprintManager = fingerprintManager;
 		mIcon = icon;
