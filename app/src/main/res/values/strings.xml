@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Citizen API</string>
+    <string name="app_name">Citizen Example App</string>
     <string name="action_settings">Settings</string>
     <string name="fingerprint_hint">Touch sensor</string>
     <string name="fingerprint_success">Fingerprint recognized</string>
