@@ -32,19 +32,19 @@ public class CreateUserTask extends AsyncTask<Object, Void, Integer>
 	@Override
 	protected Integer doInBackground(Object... params) {
 
-        String username      = (String) params[0];
-		String password      = (String) params[1];
-		String passPhrase    = (String) params[2];
+        String email = (String) params[0];
+		String password = (String) params[1];
+		String passPhrase = (String) params[2];
 		String authPublicKey = (String) params[3];
 
 		Integer statusCode = Constant.CITIZEN_SIGNUP_CODE_FAIL;
 
-        if (username == null || password == null || passPhrase == null) {
+        if (email == null || password == null || passPhrase == null) {
 			return Constant.CITIZEN_SIGNUP_CODE_MISSING_PARAMETERS;
 		}
 
 	    try {
-			user = userService.createUser(username, password, passPhrase, authPublicKey);
+			user = userService.createUser(email, password, passPhrase, authPublicKey);
             if (user != null) {
 				statusCode = Constant.CITIZEN_SIGNUP_CODE_SUCCESS;
 			}

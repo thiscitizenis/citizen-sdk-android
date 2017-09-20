@@ -39,7 +39,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
     private static final String TAG = FingerprintAuthenticationDialogFragment.class.getSimpleName();
 
     private UserService userService;
-	private String username;
+	private String email;
 
 	private LoginAttemptFinishedCallback callback;
 
@@ -84,8 +84,8 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
 		this.userService = userService;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setStage(Stage stage) {
@@ -219,7 +219,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
 		if (!passwordLoginTask.getStatus().equals(AsyncTask.Status.RUNNING)) {
 			String password = passwordInput.getText().toString();
 			passwordLoginTask = new PasswordLoginTask(this, userService);
-			passwordLoginTask.execute(username, password);
+			passwordLoginTask.execute(email, password);
 		}
 	}
 
@@ -251,7 +251,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
 			Signature signature = cryptoObject.getSignature();
 			fingerprintLoginTask = new FingerprintLoginTask(this, userService);
 
-			fingerprintLoginTask.execute(username, signature);
+			fingerprintLoginTask.execute(email, signature);
 		}
 	}
 

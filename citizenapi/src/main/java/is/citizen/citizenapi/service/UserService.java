@@ -26,11 +26,11 @@ public class UserService {
     private static final RestClient restClient = new RestClient();
 
 
-    public User createUser(String username, String password, String passPhrase, String authPublicKey)
+    public User createUser(String primaryEmail, String password, String passPhrase, String authPublicKey)
             throws HttpException, UnauthorisedException, DuplicateUserException
     {
         User user = new User();
-        user.setUsername(username);
+        user.setPrimaryEmail(primaryEmail);
         user.setPassword(password);
         user.setPassPhrase(passPhrase);
 
@@ -58,11 +58,10 @@ public class UserService {
     }
 
 
-    public User loginUserPass(String username, String password)
-            throws HttpException, UnauthorisedException, UserNotFoundException
-    {
+    public User loginUserPass(String email, String password)
+            throws HttpException, UnauthorisedException, UserNotFoundException {
         User user = new User();
-        user.setUsername(username);
+        user.setPrimaryEmail(email);
         user.setPassword(password);
 
         try {
@@ -139,7 +138,7 @@ public class UserService {
     }
 
 
-    public User loginWithSignedTransaction(String username, Signature signature)
+    public User loginWithSignedTransaction(String email, Signature signature)
         throws HttpException, UnauthorisedException, UserNotFoundException, CryptoException
     {
         User user = null;
@@ -159,7 +158,7 @@ public class UserService {
             throw new HttpException(e.getMessage());
         }
 
-        LoginTransaction loginTransaction = new LoginTransaction(username, nonce);
+        LoginTransaction loginTransaction = new LoginTransaction(email, nonce);
 
         String encodedTransactionSignature = null;
 

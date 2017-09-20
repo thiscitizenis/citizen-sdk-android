@@ -86,12 +86,12 @@ public class GrantWebLoginTokenExample extends Activity
             return;
         }
 
-        String username = params.getString("username");
+        String primaryEmail = params.getString("email");
         apiKey = params.getString("apiKey");
         mnemonic = params.getString("mnemonic");
 
         exampleDescription.setText("Grant Web Login Token Example");
-        resultDescription.setText("User: " + username);
+        resultDescription.setText("User: " + primaryEmail);
         nextExampleText.setVisibility(View.GONE);
         nextExampleButton.setVisibility(View.GONE);
         numericalInput.setVisibility(View.GONE);

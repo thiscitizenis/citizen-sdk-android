@@ -75,7 +75,7 @@ public class PasswordLoginExample extends Activity
             return;
         }
 
-        final String username = params.getString("username");
+        final String email = params.getString("email");
         final String password = params.getString("password");
 
         FloatingActionButton runExampleButton = (FloatingActionButton) findViewById(R.id.example_run_button);
@@ -83,7 +83,7 @@ public class PasswordLoginExample extends Activity
             @Override
             public void onClick(View view) {
                 PasswordLoginTask passwordLoginTask = new PasswordLoginTask(callback, userService);
-                passwordLoginTask.execute(username, password);
+                passwordLoginTask.execute(email, password);
             }
         });
 

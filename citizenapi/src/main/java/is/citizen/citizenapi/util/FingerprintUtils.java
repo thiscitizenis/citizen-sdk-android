@@ -37,7 +37,7 @@ public class FingerprintUtils
                                                                 FingerprintAuthenticationDialogFragment.LoginAttemptFinishedCallback callback,
                                                                 FingerprintService fingerprintService,
                                                                 UserService userService,
-                                                                String username)
+                                                                String email)
             throws FingerprintDialogException
     {
         Signature signature = null;
@@ -54,7 +54,7 @@ public class FingerprintUtils
             FingerprintAuthenticationDialogFragment fragment = new FingerprintAuthenticationDialogFragment();
             fragment.setCallback(callback);
             fragment.setUserService(userService);
-            fragment.setUsername(username);
+            fragment.setEmail(email);
             fragment.setCryptoObject(new FingerprintManagerCompat.CryptoObject(signature));
 
             fragment.setStage(FingerprintAuthenticationDialogFragment.Stage.FINGERPRINT);
@@ -67,7 +67,7 @@ public class FingerprintUtils
              FingerprintAuthenticationDialogFragment fragment = new FingerprintAuthenticationDialogFragment();
              fragment.setCallback(callback);
              fragment.setUserService(userService);
-             fragment.setUsername(username);
+             fragment.setEmail(email);
              fragment.setCryptoObject(new FingerprintManagerCompat.CryptoObject(signature));
              fragment.setStage(FingerprintAuthenticationDialogFragment.Stage.NEW_FINGERPRINT_ENROLLED);
              fragment.show(activity.getFragmentManager(), FINGERPRINT_AUTHENTICATION_DIALOG_FRAGMENT_TAG);
