@@ -11,7 +11,7 @@ and here:
 The project contains a skeleton app with examples of the following tasks:
 
   - Create a new user (CreateNewUserExample.java).
-  - Log in with a username and password (PasswordLoginExample.java).
+  - Log in with a primaryEmail and password (PasswordLoginExample.java).
   - Create a key pair for fingerprint login and signing (CreateFingerprintKeyExample.java).
   - Log in using a fingerprint signature (FingerprintLoginExample.java).
   - Set the user's name (SetNameExample.java).

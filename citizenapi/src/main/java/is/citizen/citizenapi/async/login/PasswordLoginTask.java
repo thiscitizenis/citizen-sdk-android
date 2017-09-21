@@ -34,18 +34,18 @@ public class PasswordLoginTask  extends AsyncTask<Object, Void, Integer> {
 
     protected Integer doInBackground(Object... params) {
 
-        String username = (String) params[0];
+        String email = (String) params[0];
         String password = (String) params[1];
 
         Integer statusCode = Constant.CITIZEN_LOGIN_CODE_FAIL;
 
-        if (username == null || password == null) {
+        if (email == null || password == null) {
             Log.e(TAG, "One or more parameters is null");
             return Constant.CITIZEN_LOGIN_CODE_MISSING_PARAMETERS;
         }
 
         try {
-            user = userService.loginUserPass(username, password);
+            user = userService.loginUserPass(email, password);
             if (user != null) {
                 statusCode = Constant.CITIZEN_LOGIN_CODE_SUCCESS;
             }

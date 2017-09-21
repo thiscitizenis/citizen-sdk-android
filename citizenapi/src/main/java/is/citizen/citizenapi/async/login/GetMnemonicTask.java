@@ -33,18 +33,18 @@ public class GetMnemonicTask extends AsyncTask<Object, Void, Integer>
 	@Override
 	protected Integer doInBackground(Object... params) {
 
-        String username   = (String) params[0];
+        String email   = (String) params[0];
 		String passphrase = (String) params[1];
 		String apiKey     = (String) params[2];
 
 		Integer statusCode = Constant.CITIZEN_REST_CODE_FAIL;
 
-        if (username == null || passphrase == null || apiKey == null) {
+        if (email == null || passphrase == null || apiKey == null) {
 			return Constant.CITIZEN_REST_CODE_MISSING_PARAMETERS;
 		}
 
 		User user = new User();
-		user.setUsername(username);
+		user.setPrimaryEmail(email);
         user.setPassPhrase(passphrase);
 
 	    try {

@@ -56,7 +56,7 @@ public class CreateNewUserExample extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example_default);
 
-        final String username = new BigInteger(130, random).toString(32).substring(0, 8) + "@test.com";
+        final String primaryEmail = new BigInteger(130, random).toString(32).substring(0, 8) + "@test.com";
         final String password = "Test1234";
         final String passphrase = "Test12";
 
@@ -74,7 +74,7 @@ public class CreateNewUserExample extends Activity
         spinnerInput = (Spinner) findViewById(R.id.example_spinner);
 
         exampleDescription.setText("Create User Example");
-        resultDescription.setText("Username:");
+        resultDescription.setText("Email:");
         nextExampleText.setVisibility(View.GONE);
         nextExampleButton.setVisibility(View.GONE);
         numericalInput.setVisibility(View.GONE);
@@ -86,7 +86,7 @@ public class CreateNewUserExample extends Activity
             @Override
             public void onClick(View view) {
                 CreateUserTask createUserTask = new CreateUserTask(callback, userService);
-                createUserTask.execute(username, password, passphrase, null);
+                createUserTask.execute(primaryEmail, password, passphrase, null);
             }
         });
 
@@ -98,7 +98,7 @@ public class CreateNewUserExample extends Activity
                 Bundle params = new Bundle();
                 params.putString("userId", userReceived.getId());
                 params.putString("personId", userReceived.getPersonId());
-                params.putString("username", userReceived.getUsername());
+                params.putString("email", userReceived.getPrimaryEmail());
                 params.putString("password", password);
                 params.putString("passphrase", passphrase);
                 params.putString("mnemonic", userReceived.getMnemonicCode());
@@ -112,7 +112,7 @@ public class CreateNewUserExample extends Activity
 
     public void createUserTaskFinished(Integer statusCode, User user) {
         if (statusCode == Constant.CITIZEN_SIGNUP_CODE_SUCCESS) {
-            resultValue.setText(user.getUsername());
+            resultValue.setText(user.getPrimaryEmail());
             nextExampleText.setVisibility(View.VISIBLE);
             nextExampleButton.setVisibility(View.VISIBLE);
             this.userReceived = user;

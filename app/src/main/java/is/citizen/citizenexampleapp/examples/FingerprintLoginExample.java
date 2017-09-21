@@ -82,14 +82,14 @@ public class FingerprintLoginExample extends Activity
             return;
         }
 
-        final String username = params.getString("username");
+        final String primaryEmail = params.getString("email");
 
         FloatingActionButton runExampleButton = (FloatingActionButton) findViewById(R.id.example_run_button);
         runExampleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    FingerprintUtils.loginWithFingerprintAuthenticationDialog(activity, fingerprintCallback, fingerprintService, userService, username);
+                    FingerprintUtils.loginWithFingerprintAuthenticationDialog(activity, fingerprintCallback, fingerprintService, userService, primaryEmail);
                 } catch (FingerprintDialogException e) {
                     Log.e(TAG, "Caught exception: " + e.getMessage());
                     resultValue.setText("Exception");

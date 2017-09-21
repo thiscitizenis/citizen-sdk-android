@@ -14,10 +14,10 @@ public final class User implements Serializable {
     private static final long serialVersionUID = -2462246955420639790L;
 
     @JsonView({CitizenView.User.Register.class, CitizenView.User.Login.class})
-    private String username;
+    private String primaryEmail;
 
     @JsonView({CitizenView.User.Register.class, CitizenView.User.Login.class})
-    private String namespace;
+    private String username;
 
     @JsonView({CitizenView.User.Register.class, CitizenView.User.Login.class})
     private String id;
@@ -71,7 +71,20 @@ public final class User implements Serializable {
         this.apiKey = apiKey;
     }
 
+    public String getPrimaryEmail() {
+        return primaryEmail;
+    }
+
+    public void setPrimaryEmail(String primaryEmail) {
+        this.primaryEmail = primaryEmail;
+    }
+
     public String getUsername() {
+        return username;
+    }
+
+    @Deprecated
+    public String getNamespace() {
         return username;
     }
 
@@ -79,9 +92,10 @@ public final class User implements Serializable {
         this.username = username;
     }
 
-    public String getNamespace() { return namespace; }
-
-    public void setNamespace(String namespace) { this.namespace = namespace; }
+    @Deprecated
+    public void setNamespace(String username) {
+        this.username = username;
+    }
 
     public String getPassword() {
         return password;
@@ -151,7 +165,7 @@ public final class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, id, apiKey, personId);
+        return Objects.hash(primaryEmail, password, id, apiKey, personId);
     }
 
     @Override
@@ -163,7 +177,7 @@ public final class User implements Serializable {
             return false;
         }
         final User other = (User) obj;
-        return Objects.equals(this.username, other.username) &&
+        return Objects.equals(this.primaryEmail, other.primaryEmail) &&
                Objects.equals(this.password, other.password) &&
                Objects.equals(this.apiKey, other.apiKey) &&
                Objects.equals(this.personId, other.personId) &&

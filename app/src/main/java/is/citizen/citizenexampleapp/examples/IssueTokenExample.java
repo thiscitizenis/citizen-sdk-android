@@ -86,13 +86,13 @@ public class IssueTokenExample extends Activity
             return;
         }
 
-        final String username = params.getString("username");
+        final String email = params.getString("email");
         final String apiKey = params.getString("apiKey");
         final String mnemonic = params.getString("mnemonic");
 
         final Token token_1 = new Token();
-        token_1.setRequesterEmail(username);
-        token_1.setUserEmail(username);
+        token_1.setRequesterEmail(email);
+        token_1.setUserEmail(email);
         token_1.setDurationType(TokenDurationType.MONTH);
         token_1.setDuration(2);
         int access = 0;
@@ -101,8 +101,8 @@ public class IssueTokenExample extends Activity
         token_1.setAccess(access);
 
         final Token token_2 = new Token();
-        token_2.setRequesterEmail(username);
-        token_2.setUserEmail(username);
+        token_2.setRequesterEmail(email);
+        token_2.setUserEmail(email);
         token_2.setDurationType(TokenDurationType.WEEK);
         token_2.setDuration(6);
         access = 0;
@@ -111,8 +111,8 @@ public class IssueTokenExample extends Activity
         token_2.setAccess(access);
 
         final Token token_3 = new Token();
-        token_3.setRequesterEmail(username);
-        token_3.setUserEmail(username);
+        token_3.setRequesterEmail(email);
+        token_3.setUserEmail(email);
         token_3.setDurationType(TokenDurationType.MONTH);
         token_3.setDuration(2);
         access = 0;

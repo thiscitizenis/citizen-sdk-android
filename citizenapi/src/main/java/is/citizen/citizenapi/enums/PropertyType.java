@@ -17,7 +17,7 @@ public enum PropertyType {
     POB,
     NATIONALITY,
     PROFILEPIC,
-    NAMESPACE,
+    USERNAME,
     REQUESTER_LAT,
     REQUESTER_LNG,
     RESPONDER_LAT,

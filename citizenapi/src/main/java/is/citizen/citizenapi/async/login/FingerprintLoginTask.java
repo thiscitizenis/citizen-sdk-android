@@ -38,18 +38,18 @@ public class FingerprintLoginTask extends AsyncTask<Object, Void, Integer> {
 
     protected Integer doInBackground(Object... params) {
 
-        String username     = (String) params[0];
+        String email = (String) params[0];
         Signature signature = (Signature) params[1];
 
         Integer statusCode = Constant.CITIZEN_LOGIN_CODE_FAIL;
 
-        if (username == null || signature == null) {
+        if (email == null || signature == null) {
             Log.e(TAG, "One or more parameters is null");
             return Constant.CITIZEN_LOGIN_CODE_MISSING_PARAMETERS;
         }
 
         try {
-            user = userService.loginWithSignedTransaction(username, signature);
+            user = userService.loginWithSignedTransaction(email, signature);
             if (user != null) {
                 statusCode = Constant.CITIZEN_LOGIN_CODE_SUCCESS;
             }
